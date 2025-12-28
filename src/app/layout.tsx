@@ -8,6 +8,11 @@ import { AppLoader } from "@/components/ui/app-loader";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { ChatFAB } from "@/components/agent-chat/ChatFAB";
 
+// Force dynamic rendering for all pages to prevent build-time errors
+export const dynamic = 'force-dynamic';
+export const dynamicParams = true;
+export const revalidate = 0;
+
 const interHeading = Inter({
   weight: ["500", "600", "700"],
   variable: "--font-heading",

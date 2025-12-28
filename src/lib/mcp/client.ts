@@ -61,9 +61,7 @@ export async function connectToMCPServer(
         version: '1.0.0',
       },
       {
-        capabilities: {
-          tools: {},
-        },
+        capabilities: {},
       }
     );
 

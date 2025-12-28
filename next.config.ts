@@ -24,6 +24,10 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
     // Minify server code in production
     serverMinification: true,
+    // Disable worker threads to avoid Railway build issues
+    workerThreads: false,
+    // Disable parallel builds
+    cpus: 1,
   },
 
   // Production-only optimizations

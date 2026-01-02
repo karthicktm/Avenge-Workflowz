@@ -21,6 +21,7 @@
     "test:watch": "vitest watch",
     "test:generate": "tsx tests/scripts/generate-tests.ts",
     "test:coverage": "tsx tests/scripts/check-coverage.ts",
+    "db:create": "tsx scripts/create-database.ts",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",

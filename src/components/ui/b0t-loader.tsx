@@ -29,54 +29,20 @@ export function B0tLoader() {
 
       {/* Main loader content */}
       <div className="relative z-10 flex flex-col items-center gap-8">
-        {/* b0t text with individual letter animations */}
-        <div className="flex items-center gap-1">
-          <motion.span
-            className="text-9xl font-bold bg-gradient-to-br from-primary via-blue-500 to-primary bg-clip-text text-transparent"
-            animate={{
-              y: [0, -20, 0],
-              rotate: [0, -5, 0]
-            }}
-            transition={{
-              repeat: Infinity,
-              duration: 2,
-              delay: 0,
-              ease: "easeInOut"
-            }}
-          >
-            b
-          </motion.span>
-          <motion.span
-            className="text-9xl font-bold bg-gradient-to-br from-blue-500 via-primary to-blue-500 bg-clip-text text-transparent"
-            animate={{
-              scale: [1, 1.3, 1],
-              rotate: [0, 180, 360]
-            }}
-            transition={{
-              repeat: Infinity,
-              duration: 2,
-              delay: 0.2,
-              ease: "easeInOut"
-            }}
-          >
-            0
-          </motion.span>
-          <motion.span
-            className="text-9xl font-bold bg-gradient-to-br from-primary via-blue-500 to-primary bg-clip-text text-transparent"
-            animate={{
-              y: [0, -20, 0],
-              rotate: [0, 5, 0]
-            }}
-            transition={{
-              repeat: Infinity,
-              duration: 2,
-              delay: 0.4,
-              ease: "easeInOut"
-            }}
-          >
-            t
-          </motion.span>
-        </div>
+        {/* Avenge-Workflowz text with animation */}
+        <motion.div
+          className="text-6xl md:text-7xl font-bold bg-gradient-to-br from-primary via-blue-500 to-primary bg-clip-text text-transparent"
+          animate={{
+            scale: [1, 1.05, 1],
+          }}
+          transition={{
+            repeat: Infinity,
+            duration: 2,
+            ease: "easeInOut"
+          }}
+        >
+          Avenge-Workflowz
+        </motion.div>
 
         {/* Pulsing glow effect behind text */}
         <motion.div

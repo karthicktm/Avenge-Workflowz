@@ -49,6 +49,8 @@ export default function CredentialsPage() {
 
   // Handle OAuth callback success/error messages
   useEffect(() => {
+    if (!searchParams) return;
+
     const success = searchParams.get('success');
     const error = searchParams.get('error');
 

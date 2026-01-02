@@ -4,13 +4,15 @@ const nextConfig: NextConfig = {
   // Force dynamic rendering for all pages to avoid static generation errors
   output: 'standalone',
 
-  // Skip generating 404 and 500 pages during build to prevent Html import errors
+  // Skip generating static error pages (404/500) during build
+  // This prevents prerendering errors with client-side error boundaries
   generateBuildId: async () => {
     return 'build-' + Date.now();
   },
 
-  // Skip static error page generation during build
-  // This prevents build failures from prerendering errors
+  // Disable static page generation for error pages
+  skipTrailingSlashRedirect: true,
+
   typescript: {
     ignoreBuildErrors: false,
   },

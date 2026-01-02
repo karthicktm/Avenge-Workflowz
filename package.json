@@ -25,6 +25,8 @@
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
     "db:push:force": "drizzle-kit push --force",
+    "db:reset": "node scripts/reset-db.js",
+    "db:reset:migrate": "npm run db:reset && npm run db:migrate",
     "db:studio": "drizzle-kit studio",
     "db:seed": "tsx scripts/seed-admin.ts",
     "workflow:create": "tsx scripts/create-workflow.ts",

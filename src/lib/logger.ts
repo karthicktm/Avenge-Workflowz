@@ -16,26 +16,45 @@ import pino from 'pino';
  * logger.debug('Debug info', { data: someData });
  */
 
-// IMPORTANT: Check Edge Runtime BEFORE accessing any Node.js APIs
-const isEdgeRuntime = process.env.NEXT_RUNTIME === 'edge';
+// IMPORTANT: Check browser environment BEFORE accessing any Node.js APIs
+// Using typeof window check that webpack can't eliminate, so we get a runtime check
+const isBrowser = typeof window !== 'undefined';
 
-// Create logger based on runtime environment
-let pinoLogger: pino.Logger;
-
-if (isEdgeRuntime) {
-  // Simple Edge-compatible logger - no Node.js APIs
-  pinoLogger = pino({
+// Create a simple browser-safe logger that doesn't use Node.js APIs
+const createBrowserLogger = (): pino.Logger => {
+  return pino({
     level: 'info',
     browser: {
       asObject: true,
+      write: {
+        // Send logs to console in browser
+        info: (o: unknown) => console.info(o),
+        error: (o: unknown) => console.error(o),
+        warn: (o: unknown) => console.warn(o),
+        debug: (o: unknown) => console.debug(o),
+      },
     },
   });
+};
+
+// Create logger - use simple browser logger for all client-side code
+// This ensures no Node.js APIs are bundled in client code
+let pinoLogger: pino.Logger;
+
+if (isBrowser) {
+  pinoLogger = createBrowserLogger();
 } else {
-  // Node.js runtime - load full logger from separate file
-  // This avoids bundling Node.js APIs into Edge Runtime
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const { createNodeLogger } = require('./logger.node');
-  pinoLogger = createNodeLogger();
+  // Server-side only: Load Node.js logger dynamically
+  // Wrapped in try-catch because webpack aliases this to false in client builds
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const { createNodeLogger } = require('./logger.node');
+    pinoLogger = createNodeLogger();
+  } catch {
+    // Fallback to browser logger if Node.js logger isn't available
+    // This should only happen if something goes wrong with the build
+    pinoLogger = createBrowserLogger();
+  }
 }
 
 // Export the logger

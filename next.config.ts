@@ -69,6 +69,12 @@ const nextConfig: NextConfig = {
         'better-sqlite3': 'commonjs better-sqlite3',
         'snoowrap': 'commonjs snoowrap',
       });
+    } else {
+      // Don't bundle server-only logger in client code
+      // This prevents "multistream is not a function" error in browser
+      config.resolve = config.resolve || {};
+      config.resolve.alias = config.resolve.alias || {};
+      config.resolve.alias['@/lib/logger.node'] = false;
     }
 
     // Suppress warnings about missing optional dependencies, conflicting exports, and package externals
@@ -81,6 +87,7 @@ const nextConfig: NextConfig = {
       /conflicting star exports/,
       /A Node\.js API is used/,
       /Package ioredis can't be external/,
+      /Module not found.*logger\.node/,
     ];
 
     return config;

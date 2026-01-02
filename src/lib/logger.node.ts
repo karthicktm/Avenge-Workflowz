@@ -1,6 +1,6 @@
 /**
  * Node.js-specific logger implementation
- * This file should ONLY be imported in Node.js runtime, not Edge Runtime
+ * This file should ONLY be imported in Node.js runtime, not Edge Runtime or browser
  */
 
 import pino from 'pino';

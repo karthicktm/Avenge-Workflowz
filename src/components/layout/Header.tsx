@@ -59,15 +59,9 @@ export function Header() {
       <nav className="flex w-full items-center justify-between">
         {/* Left side - Logo/Brand */}
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-0.5">
+          <div className="flex items-center">
             <span className="text-xl font-bold bg-gradient-to-br from-primary via-blue-500 to-primary bg-clip-text text-transparent">
-              b
-            </span>
-            <span className="text-xl font-bold bg-gradient-to-br from-blue-500 via-primary to-blue-500 bg-clip-text text-transparent">
-              0
-            </span>
-            <span className="text-xl font-bold bg-gradient-to-br from-primary via-blue-500 to-primary bg-clip-text text-transparent">
-              t
+              Avenge
             </span>
           </div>
 

@@ -4,7 +4,7 @@
     "buildCommand": "npm install --omit=dev --no-audit --no-fund && npm run build && cp -r public .next/standalone/ && cp -r .next/static .next/standalone/.next/"
   },
   "deploy": {
-    "startCommand": "npm run db:migrate && HOSTNAME=0.0.0.0 node .next/standalone/server.js",
+    "startCommand": "npm run db:migrate && ENABLE_FILE_LOGS=false HOSTNAME=0.0.0.0 node .next/standalone/server.js",
     "restartPolicyType": "ON_FAILURE",
     "restartPolicyMaxRetries": 10
   }

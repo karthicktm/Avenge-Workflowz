@@ -23,6 +23,8 @@ function RegisterForm() {
 
   useEffect(() => {
     // Get token and email from URL
+    if (!searchParams) return;
+
     const tokenParam = searchParams.get('token');
     const emailParam = searchParams.get('email');
 

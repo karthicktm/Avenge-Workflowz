@@ -6,7 +6,13 @@ import { NextResponse } from 'next/server';
  *
  * This middleware protects routes that require authentication.
  * Configure which routes to protect in the `config.matcher` below.
+ *
+ * IMPORTANT: This middleware uses Node.js runtime because @/lib/auth imports bcryptjs,
+ * which requires Node.js crypto module (not available in Edge Runtime).
  */
+
+// Force middleware to use Node.js runtime instead of Edge Runtime
+export const runtime = 'nodejs';
 
 export default auth((req) => {
   const { pathname } = req.nextUrl;

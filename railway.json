@@ -4,7 +4,7 @@
     "buildCommand": "rm -rf .next/server .next/static .next/standalone || true && npm install --omit=dev --no-audit --no-fund && NEXT_PRIVATE_SKIP_VALIDATION=1 npm run build && cp -r public .next/standalone/ && cp -r .next/static .next/standalone/.next/"
   },
   "deploy": {
-    "preDeployCommand": ["npm run db:push:force"],
+    "preDeployCommand": ["npm run db:create && npm run db:push:force"],
     "startCommand": "HOSTNAME=0.0.0.0 node .next/standalone/server.js",
     "restartPolicyType": "ON_FAILURE",
     "restartPolicyMaxRetries": 10

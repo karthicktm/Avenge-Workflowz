@@ -9,6 +9,7 @@
  * Only use in development/staging environments.
  */
 
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const { Pool } = require('pg');
 
 async function resetDatabase() {

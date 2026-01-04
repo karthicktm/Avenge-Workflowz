@@ -21,10 +21,10 @@ const TEMPLATES_DIR = join(process.cwd(), '.claude/skills/workflow-generator-v2/
  */
 export async function GET(
   request: Request,
-  { params }: { params: { name: string } }
+  { params }: { params: Promise<{ name: string }> }
 ) {
   try {
-    const { name } = params;
+    const { name } = await params;
 
     // Security: prevent directory traversal
     if (name.includes('..') || name.includes('/..') || name.startsWith('/')) {
@@ -48,7 +48,7 @@ export async function GET(
       content,
     });
   } catch (error) {
-    logger.error({ error, name: params.name }, 'Failed to load template');
+    logger.error({ error }, 'Failed to load template');
     return NextResponse.json({ error: 'Template not found' }, { status: 404 });
   }
 }

@@ -32,7 +32,7 @@ export default function BuilderPage() {
                 <div>
                   <h2 className="text-2xl font-semibold mb-3">Build Workflows with AI</h2>
                   <p className="text-gray-600 text-lg">
-                    Tell me what you want to automate, and I'll help you build a workflow.
+                    Tell me what you want to automate, and I&apos;ll help you build a workflow.
                     I can connect to 140+ services across 16 categories.
                   </p>
                 </div>
@@ -86,8 +86,8 @@ export default function BuilderPage() {
                 <div className="pt-6 border-t">
                   <p className="text-xs text-gray-500">
                     💡 Tip: Be specific about what you want to automate. For example:
-                    "Create a workflow that monitors my Twitter mentions every hour and replies
-                    using GPT-4 to generate helpful responses."
+                    &quot;Create a workflow that monitors my Twitter mentions every hour and replies
+                    using GPT-4 to generate helpful responses.&quot;
                   </p>
                 </div>
               </div>

@@ -7,7 +7,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
 import { db } from '@/lib/db';
 import { userAiKeysTable } from '@/lib/schema';
-import { encrypt, decrypt } from '@/lib/encryption';
+import { encrypt } from '@/lib/encryption';
 import { eq, and } from 'drizzle-orm';
 import { nanoid } from 'nanoid';
 import { logger } from '@/lib/logger';

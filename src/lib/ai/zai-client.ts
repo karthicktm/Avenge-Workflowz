@@ -129,7 +129,7 @@ export class ZAIClient {
             if (content) {
               yield content;
             }
-          } catch (parseError) {
+          } catch {
             // Ignore JSON parse errors for incomplete chunks
             logger.debug({ line: trimmed }, 'Failed to parse Z.AI stream chunk');
           }

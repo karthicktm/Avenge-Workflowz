@@ -136,7 +136,7 @@ export default function SettingsPage() {
               AI API Keys
             </CardTitle>
             <CardDescription>
-              Add your own API keys for unlimited usage. Without your own keys, you'll use
+              Add your own API keys for unlimited usage. Without your own keys, you&apos;ll use
               platform keys with rate limiting (50 requests/hour per provider).
             </CardDescription>
           </CardHeader>

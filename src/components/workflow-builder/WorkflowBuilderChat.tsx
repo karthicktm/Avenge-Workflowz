@@ -194,10 +194,10 @@ export function WorkflowBuilderChat({ onClose }: WorkflowBuilderChatProps) {
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {messages.length === 0 && (
           <div className="text-center text-gray-500 mt-8">
-            <p className="text-lg font-medium mb-2">👋 Hi! I'm your workflow builder assistant.</p>
-            <p className="text-sm">Tell me what workflow you'd like to build, and I'll help you create it.</p>
+            <p className="text-lg font-medium mb-2">👋 Hi! I&apos;m your workflow builder assistant.</p>
+            <p className="text-sm">Tell me what workflow you&apos;d like to build, and I&apos;ll help you create it.</p>
             <p className="text-sm mt-4 text-gray-400">
-              Example: "Create a workflow that searches Twitter for mentions and replies with AI"
+              Example: &quot;Create a workflow that searches Twitter for mentions and replies with AI&quot;
             </p>
           </div>
         )}

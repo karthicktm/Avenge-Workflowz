@@ -50,7 +50,7 @@ export function WorkflowBuilderChat({ onClose }: WorkflowBuilderChatProps) {
         setModel('claude-3-5-sonnet-20241022');
         break;
       case 'zai':
-        setModel('glm-4-7');
+        setModel('glm-4-flash');
         break;
     }
   };
@@ -165,11 +165,11 @@ export function WorkflowBuilderChat({ onClose }: WorkflowBuilderChatProps) {
   };
 
   return (
-    <div className="flex flex-col h-full border rounded-lg bg-white">
+    <div className="flex flex-col h-full border border-border/50 rounded-lg bg-background shadow-sm">
       {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b">
+      <div className="flex items-center justify-between p-4 border-b border-border/50">
         <div className="flex items-center gap-4">
-          <h2 className="font-semibold">AI Workflow Builder</h2>
+          <h2 className="font-semibold text-foreground">AI Workflow Builder</h2>
 
           <Select value={provider} onValueChange={handleProviderChange}>
             <SelectTrigger className="w-[160px]">
@@ -193,10 +193,10 @@ export function WorkflowBuilderChat({ onClose }: WorkflowBuilderChatProps) {
       {/* Messages */}
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {messages.length === 0 && (
-          <div className="text-center text-gray-500 mt-8">
-            <p className="text-lg font-medium mb-2">👋 Hi! I&apos;m your workflow builder assistant.</p>
+          <div className="text-center text-muted-foreground mt-8">
+            <p className="text-lg font-medium mb-2 text-foreground">👋 Hi! I&apos;m your workflow builder assistant.</p>
             <p className="text-sm">Tell me what workflow you&apos;d like to build, and I&apos;ll help you create it.</p>
-            <p className="text-sm mt-4 text-gray-400">
+            <p className="text-sm mt-4 opacity-70">
               Example: &quot;Create a workflow that searches Twitter for mentions and replies with AI&quot;
             </p>
           </div>
@@ -211,7 +211,7 @@ export function WorkflowBuilderChat({ onClose }: WorkflowBuilderChatProps) {
               className={`max-w-[80%] rounded-lg p-3 ${
                 message.role === 'user'
                   ? 'bg-primary text-primary-foreground'
-                  : 'bg-gray-100 text-gray-900'
+                  : 'bg-muted text-foreground'
               }`}
             >
               {message.role === 'assistant' ? (
@@ -225,8 +225,8 @@ export function WorkflowBuilderChat({ onClose }: WorkflowBuilderChatProps) {
 
         {isLoading && messages[messages.length - 1]?.role === 'user' && (
           <div className="flex justify-start">
-            <div className="bg-gray-100 rounded-lg p-3">
-              <Loader2 className="w-5 h-5 animate-spin text-gray-500" />
+            <div className="bg-muted rounded-lg p-3">
+              <Loader2 className="w-5 h-5 animate-spin text-muted-foreground" />
             </div>
           </div>
         )}
@@ -235,7 +235,7 @@ export function WorkflowBuilderChat({ onClose }: WorkflowBuilderChatProps) {
       </div>
 
       {/* Input */}
-      <form onSubmit={handleSubmit} className="p-4 border-t">
+      <form onSubmit={handleSubmit} className="p-4 border-t border-border/50">
         <div className="flex gap-2">
           <Textarea
             value={inputValue}

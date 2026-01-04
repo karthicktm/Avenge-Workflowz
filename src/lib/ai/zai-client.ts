@@ -65,9 +65,16 @@ export class ZAIClient {
       });
 
       if (!response.ok) {
-        const error = await response.text();
-        logger.error({ status: response.status, error }, 'Z.AI API error');
-        throw new Error(`Z.AI API error: ${response.status} ${error}`);
+        const errorBody = await response.text();
+        logger.error({ status: response.status, error: errorBody }, 'Z.AI API error');
+        let errorMessage = `Z.AI API error (${response.status})`;
+        try {
+          const parsed = JSON.parse(errorBody);
+          errorMessage = parsed.error?.message || parsed.message || errorMessage;
+        } catch {
+          if (errorBody) errorMessage = errorBody;
+        }
+        throw new Error(errorMessage);
       }
 
       return response.json();
@@ -93,9 +100,17 @@ export class ZAIClient {
       });
 
       if (!response.ok) {
-        const error = await response.text();
-        logger.error({ status: response.status, error }, 'Z.AI stream error');
-        throw new Error(`Z.AI stream error: ${response.status}`);
+        const errorBody = await response.text();
+        logger.error({ status: response.status, error: errorBody }, 'Z.AI stream error');
+        let errorMessage = `Z.AI API error (${response.status})`;
+        try {
+          const parsed = JSON.parse(errorBody);
+          errorMessage = parsed.error?.message || parsed.message || errorMessage;
+        } catch {
+          // Use raw error if not JSON
+          if (errorBody) errorMessage = errorBody;
+        }
+        throw new Error(errorMessage);
       }
 
       if (!response.body) {

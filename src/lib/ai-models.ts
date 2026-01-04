@@ -5,7 +5,7 @@
  * Update this file when new models are released or deprecated.
  */
 
-export type AIProvider = 'openai' | 'anthropic' | 'openrouter';
+export type AIProvider = 'openai' | 'anthropic' | 'openrouter' | 'zai';
 
 export interface AIModel {
   id: string;
@@ -183,6 +183,41 @@ export const ANTHROPIC_MODELS: AIModel[] = [
 ];
 
 /**
+ * Z.AI Models (GLM)
+ * Documentation: https://docs.z.ai/guides/overview/quick-start
+ */
+export const ZAI_MODELS: AIModel[] = [
+  {
+    id: 'glm-4-7',
+    name: 'GLM-4.7',
+    provider: 'zai',
+    contextWindow: 128000,
+    description: 'Latest GLM model with enhanced performance',
+  },
+  {
+    id: 'glm-4-6',
+    name: 'GLM-4.6',
+    provider: 'zai',
+    contextWindow: 128000,
+    description: 'Previous generation GLM model',
+  },
+  {
+    id: 'glm-4-5',
+    name: 'GLM-4.5',
+    provider: 'zai',
+    contextWindow: 128000,
+    description: 'Stable GLM model',
+  },
+  {
+    id: 'glm-4-32b-0414-128k',
+    name: 'GLM-4-32B (128K)',
+    provider: 'zai',
+    contextWindow: 128000,
+    description: 'Large context window GLM model',
+  },
+];
+
+/**
  * OpenRouter Models
  * Documentation: https://openrouter.ai/docs
  *
@@ -226,7 +261,7 @@ export async function fetchOpenRouterModels(): Promise<AIModel[]> {
 /**
  * All available AI models
  */
-export const ALL_MODELS: AIModel[] = [...OPENAI_MODELS, ...ANTHROPIC_MODELS, ...OPENROUTER_MODELS];
+export const ALL_MODELS: AIModel[] = [...OPENAI_MODELS, ...ANTHROPIC_MODELS, ...ZAI_MODELS, ...OPENROUTER_MODELS];
 
 /**
  * Get models for a specific provider
@@ -287,6 +322,7 @@ export const DEFAULT_MODELS: Record<AIProvider, string> = {
   openai: 'gpt-4o-mini',
   anthropic: 'claude-3-5-sonnet-20241022',
   openrouter: 'openai/gpt-4o-mini',
+  zai: 'glm-4-7',
 };
 
 /**
@@ -304,20 +340,24 @@ export const RECOMMENDED_MODELS = {
     openai: 'gpt-4o-mini',
     anthropic: 'claude-3-5-haiku-20241022',
     openrouter: 'openai/gpt-4o-mini',
+    zai: 'glm-4-5',
   },
   balanced: {
     openai: 'gpt-4o',
     anthropic: 'claude-3-5-sonnet-20241022',
     openrouter: 'anthropic/claude-3.5-sonnet',
+    zai: 'glm-4-6',
   },
   powerful: {
     openai: 'gpt-5',
     anthropic: 'claude-opus-4.5-20250514',
     openrouter: 'meta-llama/llama-3.1-405b-instruct',
+    zai: 'glm-4-7',
   },
   reasoning: {
     openai: 'o3',
     anthropic: 'claude-opus-4.5-20250514',
     openrouter: 'openai/o1',
+    zai: 'glm-4-7',
   },
 };

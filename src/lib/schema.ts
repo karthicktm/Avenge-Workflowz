@@ -333,6 +333,44 @@ export const agentChatMessagesTable = pgTable('agent_chat_messages', {
 }));
 
 // ============================================
+// AI API KEYS TABLES
+// ============================================
+
+// User AI API Keys table (encrypted storage for user-provided API keys)
+export const userAiKeysTable = pgTable('user_ai_keys', {
+  id: varchar('id', { length: 255 }).primaryKey(),
+  userId: varchar('user_id', { length: 255 }).notNull(),
+  organizationId: varchar('organization_id', { length: 255 }),
+  provider: varchar('provider', { length: 50 }).notNull(), // 'openai' | 'anthropic' | 'zai'
+  encryptedKey: text('encrypted_key').notNull(),
+  label: varchar('label', { length: 255 }),
+  isActive: integer('is_active').notNull().default(1),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  lastUsed: timestamp('last_used'),
+  usageCount: integer('usage_count').notNull().default(0),
+}, (table) => ({
+  userIdIdx: index('user_ai_keys_user_id_idx').on(table.userId),
+  providerIdx: index('user_ai_keys_provider_idx').on(table.provider),
+  userProviderIdx: index('user_ai_keys_user_provider_idx').on(table.userId, table.provider),
+  organizationIdIdx: index('user_ai_keys_organization_id_idx').on(table.organizationId),
+}));
+
+// Platform AI Usage Tracking table (for rate limiting platform API keys)
+export const platformAiUsageTable = pgTable('platform_ai_usage', {
+  id: serial('id').primaryKey(),
+  userId: varchar('user_id', { length: 255 }).notNull(),
+  provider: varchar('provider', { length: 50 }).notNull(),
+  model: varchar('model', { length: 100 }).notNull(),
+  tokensUsed: integer('tokens_used').notNull(),
+  requestCount: integer('request_count').notNull().default(1),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  resetAt: timestamp('reset_at'),
+}, (table) => ({
+  userProviderResetIdx: index('platform_ai_usage_user_provider_reset_idx').on(table.userId, table.provider, table.resetAt),
+  createdAtIdx: index('platform_ai_usage_created_at_idx').on(table.createdAt),
+}));
+
+// ============================================
 // TYPE EXPORTS
 // ============================================
 
@@ -368,3 +406,7 @@ export type AgentChatSession = typeof agentChatSessionsTable.$inferSelect;
 export type NewAgentChatSession = typeof agentChatSessionsTable.$inferInsert;
 export type AgentChatMessage = typeof agentChatMessagesTable.$inferSelect;
 export type NewAgentChatMessage = typeof agentChatMessagesTable.$inferInsert;
+export type UserAiKey = typeof userAiKeysTable.$inferSelect;
+export type NewUserAiKey = typeof userAiKeysTable.$inferInsert;
+export type PlatformAiUsage = typeof platformAiUsageTable.$inferSelect;
+export type NewPlatformAiUsage = typeof platformAiUsageTable.$inferInsert;

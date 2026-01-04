@@ -7,10 +7,11 @@ import { useEffect, useRef, useState } from 'react';
 const navigation = [
   { name: 'Dashboard', href: '/dashboard' },
   { name: 'Workflows', href: '/dashboard/workflows' },
+  { name: 'Builder', href: '/dashboard/builder' },
   { name: 'Activity', href: '/dashboard/activity' },
   { name: 'Credentials', href: '/dashboard/credentials' },
   { name: 'Clients', href: '/dashboard/clients' },
-  // { name: 'Settings', href: '/settings' },
+  { name: 'Settings', href: '/dashboard/settings' },
 ];
 
 export function Navbar() {

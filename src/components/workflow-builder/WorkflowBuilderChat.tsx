@@ -50,7 +50,7 @@ export function WorkflowBuilderChat({ onClose }: WorkflowBuilderChatProps) {
         setModel('claude-3-5-sonnet-20241022');
         break;
       case 'zai':
-        setModel('glm-4-flash');
+        setModel('glm-4.7');
         break;
     }
   };
